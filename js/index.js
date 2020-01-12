@@ -291,7 +291,7 @@ $('#regButton').click(async function () {
 
 
   })
-//   location.reload((true))
+  location.reload()
   renderProduct();
   $(".loader").hide();
 });
