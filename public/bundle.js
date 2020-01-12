@@ -265,7 +265,7 @@ $("#housebody").click(".purchaseBtn", async function (event) {
 
   await contractCall('buyHouse', [dataIndex], parseInt(house.price, 10))
 
-  const foundIndex  =  HouseArray.findIndex(house => house.index == dataIndex)
+  const foundIndex  =  HouseArray.findIndex(house => house.id == dataIndex)
     HouseArray[foundIndex].purchased =  true
   renderProduct();
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@ GEtting bought file")
