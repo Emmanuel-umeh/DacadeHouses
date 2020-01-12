@@ -1,0 +1,61 @@
+payable contract DacadeHouses =
+      
+  record house = {
+    id:int,
+    name: string,
+    price:int,
+    purchased:bool,
+    description : string,
+    images:string,
+    owner:address,
+    filehash : string
+    
+    }
+  record state = 
+    {
+      houseLength : int,
+      houses : map(int, house)
+    }
+  entrypoint init() = 
+    { houses = {}, 
+      houseLength = 0}
+    
+  entrypoint getHouseLength() : int = 
+    state.houseLength
+
+
+  payable stateful entrypoint addHouse(name':string, price':int, images':string, description' : string, filehash' : string ) =
+    let house = {id=getHouseLength() + 1, name=name', price=price', description = description', images=images',purchased=false, owner=Call.caller, filehash=filehash' }
+    let index = getHouseLength() + 1
+    put(state{houses[index] = house, houseLength  = index})
+
+
+  entrypoint getHouse(index:int) : house = 
+    switch(Map.lookup(index, state.houses))
+      None => abort("House does not exist with this index")
+      Some(x) => x  
+
+
+  payable stateful entrypoint buyHouse(_id:int)=
+    let house = getHouse(_id)
+    
+    let  owner  = house.owner 
+    
+    require(house.id > 0,abort("NOT A House "))
+    
+    require(Chain.balance(house.owner)>= house.price,abort("You Don't Have Enough AE"))
+    
+    let updated_house = {
+      id=house.id,
+      name=house.name,
+      price=house.price,
+      images=house.images,
+      description = house.description,
+      purchased = true, 
+      owner=Call.caller,
+      filehash = house.filehash}
+    
+    put(state{houses[_id] = updated_house})
+    
+    
+    Chain.spend(owner, Call.value)
