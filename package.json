@@ -15,5 +15,8 @@
     "http-server": "~0.11.1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "buffer": "^5.4.3"
+  }
 }
