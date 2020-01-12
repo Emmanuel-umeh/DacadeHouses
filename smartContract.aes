@@ -8,6 +8,13 @@ payable contract DacadeHouses =
     description : string,
     images:string,
     owner:address,
+    // Number of rooms
+    rooms : int,
+    // Size in sqft
+    size : int, 
+
+    bathrooms : int,
+    garage : int,
     filehash : string
     
     }
@@ -24,8 +31,28 @@ payable contract DacadeHouses =
     state.houseLength
 
 
-  payable stateful entrypoint addHouse(name':string, price':int, images':string, description' : string, filehash' : string ) =
-    let house = {id=getHouseLength() + 1, name=name', price=price', description = description', images=images',purchased=false, owner=Call.caller, filehash=filehash' }
+  payable stateful entrypoint addHouse(
+        name':string,
+        price':int,
+        images':string,
+        size' : int, 
+        rooms' : int,
+        bathrooms' : int, 
+        garage' : int , 
+        description' : string,
+        filehash' : string ) =
+    let house = {id=getHouseLength() + 1,
+         name=name', 
+         price=price', 
+         description = description', 
+         images=images',
+         rooms = rooms',
+         size = size',
+         bathrooms = bathrooms',
+         garage = garage',
+         purchased=false, 
+         owner=Call.caller, 
+         filehash=filehash' }
     let index = getHouseLength() + 1
     put(state{houses[index] = house, houseLength  = index})
 
@@ -49,6 +76,10 @@ payable contract DacadeHouses =
       id=house.id,
       name=house.name,
       price=house.price,
+      rooms = house.rooms,
+      size = house.size,
+      garage = house.garage,
+      bathrooms = house.bathrooms,
       images=house.images,
       description = house.description,
       purchased = true, 

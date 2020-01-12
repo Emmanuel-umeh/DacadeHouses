@@ -11,6 +11,13 @@ payable contract DacadeHouses =
     description : string,
     images:string,
     owner:address,
+    // Number of rooms
+    rooms : int,
+    // Size in sqft
+    size : int, 
+
+    bathrooms : int,
+    garage : int,
     filehash : string
     
     }
@@ -27,8 +34,28 @@ payable contract DacadeHouses =
     state.houseLength
 
 
-  payable stateful entrypoint addHouse(name':string, price':int, images':string, description' : string, filehash' : string ) =
-    let house = {id=getHouseLength() + 1, name=name', price=price', description = description', images=images',purchased=false, owner=Call.caller, filehash=filehash' }
+  payable stateful entrypoint addHouse(
+        name':string,
+        price':int,
+        images':string,
+        size' : int, 
+        rooms' : int,
+        bathrooms' : int, 
+        garage' : int , 
+        description' : string,
+        filehash' : string ) =
+    let house = {id=getHouseLength() + 1,
+         name=name', 
+         price=price', 
+         description = description', 
+         images=images',
+         rooms = rooms',
+         size = size',
+         bathrooms = bathrooms',
+         garage = garage',
+         purchased=false, 
+         owner=Call.caller, 
+         filehash=filehash' }
     let index = getHouseLength() + 1
     put(state{houses[index] = house, houseLength  = index})
 
@@ -52,6 +79,10 @@ payable contract DacadeHouses =
       id=house.id,
       name=house.name,
       price=house.price,
+      rooms = house.rooms,
+      size = house.size,
+      garage = house.garage,
+      bathrooms = house.bathrooms,
       images=house.images,
       description = house.description,
       purchased = true, 
@@ -67,7 +98,7 @@ payable contract DacadeHouses =
 
 
 
-const contractAddress = 'ct_2BTe9KcuuAHwEGRnpbr1bGf3p2ymUSLUKdyXBjvy18JUHrrGUE';
+const contractAddress = 'ct_jyuwnmt3e7D7vHLFAQZHWhPJMDgfiSEQKfepuuaZPiRpGj5iW';
 var HouseArray = [];
 var client = null;
 // var gameLength = 0;
@@ -163,6 +194,10 @@ window.addEventListener('load', async () => {
       id: houses.id,
       image: houses.images,
       name: houses.name,
+      rooms : houses.rooms,
+      garage : houses.garage,
+      size : houses.size,
+      bathroom : houses.bathrooms,
       price: houses.price,
       purchased: houses.purchased,
       description: houses.description,
@@ -199,49 +234,69 @@ async function uploadFile(file) {
 
 
 
-// // Register House
-// $('#regButton').click(async function () {
-//   $("#loadings").show();
+// Register House
+$('#regButton').click(async function () {
+  $(".loader").show();
 
-//   var name = ($('#name').val()),
+  var name = ($('#name').val()),
 
-//   price = ($('#price').val());
+  rooms = ($('#rooms').val());
+  size = ($('#size').val());
 
-//   description = ($('#description').val());
+  bathroom = ($('#bathrooms').val());
 
-//   image = ($('#image').val());
+  garage = ($('#garage').val());
 
-//   // gets the uploaded file
+  price = ($('#price').val());
 
-//   newfile = document.getElementById('customfiles')
-
-
-//   console.log(newfile)
-//   console.log(newfile.files[0])
-
-//   file = newfile.files[0]
-
-//   // waits for the uploadFile function to be called
-//   const files = await uploadFile(file)
-//   const multihash = files[0].hash
-
-//   prices = parseInt(price, 10)
-//   reggame = await contractCall('addGame', [name, prices, image, description, multihash], 1000)
-//   console.log(multihash)
-
-//   GameArray.push({
-//     id: GameArray.length + 1,
-//     name: name,
-//     hash: multihash,
-//     price: prices
+  console.log(rooms)
+  console.log(size)
+  console.log(bathroom)
+  console.log(price)
 
 
+  description = ($('#description').val());
 
-//   })
+  image = ($('#image').val());
+
+  // gets the uploaded file
+
+  newfile = document.getElementById('customfiles')
+
+
+  console.log(newfile)
+  console.log(newfile.files[0])
+
+  file = newfile.files[0]
+
+  // waits for the uploadFile function to be called
+  const files = await uploadFile(file)
+  const multihash = files[0].hash
+
+  prices = parseInt(price, 10)
+  await contractCall('addHouse', [name, price, image, size, rooms, bathroom, garage, description, multihash], 1000)
+  console.log(multihash)
+  regHouse = await callStatic("getHouse", [HouseArray.length])
+
+  HouseArray.push({
+    id: regHouse.id,
+    image: regHouse.images,
+    name: regHouse.name,
+    rooms : regHouse.rooms,
+    garage : regHouse.garage,
+    size : regHouse.size,
+    bathroom : regHouse.bathrooms,
+    price: regHouse.price,
+    purchased: regHouse.purchased,
+    description: regHouse.description,
+    hash: regHouse.filehash
+
+
+  })
 //   location.reload((true))
-//   renderProduct();
-//   $("#loadings").hide();
-// });
+  renderProduct();
+  $(".loader").hide();
+});
 
 
 

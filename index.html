@@ -186,22 +186,22 @@
                                         <p>Lot Size</p>
                                         <img src="img/rooms/size.png" alt="">
                                         <i class="flaticon-bath"></i>
-                                        <span>2561 sqft</span>
+                                        <span>{{size}} sqft</span>
                                     </div>
                                     <div class="beds">
                                         <p>Beds</p>
                                         <img src="img/rooms/bed.png" alt="">
-                                        <span>9</span>
+                                        <span>{{rooms}}</span>
                                     </div>
                                     <div class="baths">
                                         <p>Baths</p>
                                         <img src="img/rooms/bath.png" alt="">
-                                        <span>2</span>
+                                        <span>{{bathroom}</span>
                                     </div>
                                     <div class="garage">
                                         <p>Garage</p>
                                         <img src="img/rooms/garage.png" alt="">
-                                        <span>1</span>
+                                        <span>{{garage}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -381,7 +381,52 @@
                         </div>
                     </div> -->
                 
-                
+                    <form class="custom-form">
+                        <h1>Register Form</h1>
+                        <div class="form-row form-group">
+                            <div class="col-sm-4 label-column"><label class="col-form-label"
+                                    for="name-input-field">Name </label></div>
+                            <div class="col-sm-6 input-column"><input class="form-control" type="text"
+                                    id="name"></div>
+                        </div>
+
+                        <div class="col-sm-6 input-column"><input class="form-control" type="text"
+                            id="image" placeholder="Enter Imageurl"></div>
+                        
+                        <div class="col-sm-4 label-column"><label class="col-form-label"
+                                for="email-input-field">Price</label></div>
+                        <div></div><input class="form-control" type="number" id="price">
+
+                        <div class="col-sm-4 label-column"><label class="col-form-label"
+                            for="email-input-field">Number of Rooms</label></div>
+                    <div></div><input class="form-control" type="number" id="rooms">
+
+                    <div class="col-sm-4 label-column"><label class="col-form-label"
+                        for="email-input-field">Number of Garages</label></div>
+                <div></div><input class="form-control" type="number" id="garage">
+
+                <div class="col-sm-4 label-column"><label class="col-form-label"
+                    for="email-input-field">Number of Bathrooms</label></div>
+            <div></div><input class="form-control" type="number" id="bathrooms">
+
+            <div class="col-sm-4 label-column"><label class="col-form-label"
+                for="email-input-field">Size of House in sqft</label></div>
+        <div></div><input class="form-control" type="number" id="size">
+                        
+                        <div class="col-sm-4 label-column"><label class="col-form-label"
+                            for="email-input-field">Description</label></div>
+                        <div>
+                            <textarea name="Description" id="description" cols="30" rows="10"></textarea>
+                        </div>
+                        <p>Upload the house documents</p>
+                        <!-- <input type="file" id="fileInput" /> -->
+                        <input type="file"  id="customfiles" style="border: solid 1px blue">
+                        <!-- <div id="link"></div> -->
+
+                        <button
+                            class="btn btn-light submit-button" type="button"
+                            id="regButton">Register!</button>
+                    </form>
                 </div>
             </div>
         </div>
