@@ -259,19 +259,21 @@ $("#housebody").click(".purchaseBtn", async function (event) {
   // targets the element being clicked
   dataIndex = event.target.id
 
-  // calls the getGame function from the smart contract
-  game = await callStatic('getGame', [dataIndex])
+  // calls the getHouse function from the smart contract
+  house = await callStatic('getHouse', [dataIndex])
 
 
-  await contractCall('buyGame', [dataIndex], parseInt(game.price, 10))
+  await contractCall('buyHouse', [dataIndex], parseInt(house.price, 10))
 
+  const foundIndex  =  HouseArray.findIndex(house => house.index == dataIndex)
+    HouseArray[foundIndex].purchased =  true
   renderProduct();
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@ GEtting bought file")
-  console.log("Copy this link and paste in a new tab to download your game : https://ipfs.io/ipfs/" + game.filehash)
+  console.log("Copy this link and paste in a new tab to download your game : https://ipfs.io/ipfs/" + house.filehash)
   // var bought  = document.getElementById('link')
   // console.log(bought)
   // bought.innerHTML = "Download Link : www.ipfs.io/ipfs/"+ game.filehash;
-  $("#loadings").hide();
+  $(".loader").hide();
 });
 }).call(this,require("buffer").Buffer)
 },{"buffer":3}],2:[function(require,module,exports){
