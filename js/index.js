@@ -257,6 +257,8 @@ $("#housebody").click(".purchaseBtn", async function (event) {
   // targets the element being clicked
   dataIndex = event.target.id
 
+  console.log(HouseArray[dataIndex].purchased)
+
   // calls the getHouse function from the smart contract
   house = await callStatic('getHouse', [dataIndex])
 
@@ -267,7 +269,7 @@ $("#housebody").click(".purchaseBtn", async function (event) {
     HouseArray[foundIndex].purchased =  true
   renderProduct();
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@ GEtting bought file")
-  console.log("Copy this link and paste in a new tab to download your game : https://ipfs.io/ipfs/" + house.filehash)
+  console.log("Copy this link and paste in a new tab to download the documents: https://ipfs.io/ipfs/" + house.filehash)
   // var bought  = document.getElementById('link')
   // console.log(bought)
   // bought.innerHTML = "Download Link : www.ipfs.io/ipfs/"+ game.filehash;
