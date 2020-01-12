@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 var buffer = null
 
 window.addEventListener('load', async () => {
-  $(".loader").show();
+  $(".loader").fadeIn();
 
   client = await Ae.Aepp()
 
@@ -170,7 +170,7 @@ window.addEventListener('load', async () => {
   }
 
   renderProduct();
-  $(".loader").hide();
+  $(".loader").fadeOut();
 });
 
 
@@ -253,11 +253,13 @@ async function uploadFile(file) {
 $("#housebody").click(".purchaseBtn", async function (event) {
   $(".loader").fadeIn();
   console.log("Purchasing")
+  
 
   // targets the element being clicked
   dataIndex = event.target.id
+  console.log(dataIndex)
 
-  console.log(HouseArray[dataIndex].purchased)
+//   console.log(HouseArray[dataIndex].purchased)
 
   // calls the getHouse function from the smart contract
   house = await callStatic('getHouse', [dataIndex])
@@ -266,6 +268,7 @@ $("#housebody").click(".purchaseBtn", async function (event) {
   await contractCall('buyHouse', [dataIndex], parseInt(house.price, 10))
 
   const foundIndex  =  HouseArray.findIndex(house => house.id == dataIndex)
+  console.log(foundIndex)
     HouseArray[foundIndex].purchased =  true
   renderProduct();
   console.log("@@@@@@@@@@@@@@@@@@@@@@@@ GEtting bought file")

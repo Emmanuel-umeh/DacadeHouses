@@ -208,8 +208,9 @@
                                 <p>For Sale</p>
                                 <span>{{price}} ae</span>
                             </div>
-                            {{^HouseArray{{id}}.purchased}}<button id ={{id}}  class="site-btn btn-line purchaseBtn">Purchase</button>{{/HouseArray{{id}}.purchased}}
-                            {{#HouseArray{{id}}.purchased}}<b>Sold!!!</b>{{/HouseArray{{id}}.purchased}}
+                            {{#purchased}}<b>Sold!!!</b>{{/purchased}}
+                            {{^purchased}}<button id ={{id}}  class="site-btn btn-line purchaseBtn">Purchase</button>{{/purchased}}
+                            
                             
                         </div>
                     </div>
