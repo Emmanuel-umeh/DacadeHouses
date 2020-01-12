@@ -157,6 +157,7 @@
     <section class="hotel-rooms spad">
         <div class="container">
             <div class="row">
+                <h1>Latest Houses</h1>
 
                 <div id="housebody"></div>
                 <script id="template" type="x-tmpl-mustache">
@@ -208,7 +209,7 @@
                                 <p>For Sale</p>
                                 <span>{{price}} ae</span>
                             </div>
-                            {{#purchased}}<b>Sold!!!</b>{{/purchased}}
+                            {{#purchased}} <h1><b>Sold!!!</b></h1> {{/purchased}}
                             {{^purchased}}<button id ={{id}}  class="site-btn btn-line purchaseBtn">Purchase</button>{{/purchased}}
                             
                             
