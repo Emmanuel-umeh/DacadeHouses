@@ -252,8 +252,8 @@ async function uploadFile(file) {
 
 
 
-$("#body").click(".btn", async function (event) {
-  $("#loadings").show();
+$("#housebody").click(".purchaseBtn", async function (event) {
+  $(".loader").fadeIn();
   console.log("Purchasing")
 
   // targets the element being clicked

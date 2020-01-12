@@ -164,7 +164,7 @@
                     {{#HouseArray}}
                 <div class="col-lg-4 col-md-6">
                     <div class="room-items">
-                        <div class="room-img set-bg" data-setbg="{{image}}">
+                        <div class="room-img set-bg" data-setbg={{image}}>
                             <a href="#" class="room-content">
                                 <i class="flaticon-heart"></i>
                             </a>
@@ -207,7 +207,7 @@
                                 <p>For Sale</p>
                                 <span>{{price}} ae</span>
                             </div>
-                            {{^HouseArray.purchased}}<a href="#" class="site-btn btn-line">Purchase</a>{{/HouseArray.purchased}}
+                            {{^HouseArray.purchased}}<a href="#" id ={{id}}  class="site-btn btn-line purchaseBtn">Purchase</a>{{/HouseArray.purchased}}
                             {{#HouseArray.purchased}}<b>Sold!!!</b>{{/HouseArray.purchased}}
                             
                         </div>
